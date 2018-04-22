@@ -55,7 +55,7 @@ nokogiri_sample($pathArray[$countnum])
 csvoutput_sample($pathArray[$countnum])
 $cntArray = []
 $strArray = []
-$countnum = $countnum + 1
+$countnum += 1
 end
 
 puts "出力が完了しました"
