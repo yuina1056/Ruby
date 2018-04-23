@@ -1,4 +1,4 @@
-def allayJudge_sample(array)
+def arrayJudge_sample(array)
     array.push(array.compact.reduce {|x,y| x + y.to_i })
     if array[array.length - 1] == 0
         array.push("NG")
