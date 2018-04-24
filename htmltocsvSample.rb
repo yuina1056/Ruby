@@ -10,16 +10,18 @@ def txtInput_sample(filename)
 end
 
 def search_sample(searchname)
-    def search(searchname)
-        Dir.glob("**/*") do |f|
-            #関数名の正規表現でヒットしたらそのパスをパス保持している配列pathArrayにぶっこむ
-            if f.match(/\/#{searchname}\&/)
+    Dir.glob("**/*") do |f|
+        if f.match(/.html$/)
+            file = File.open("./#{f}")
+            doc = Nokogiri::HTML(file, nil, 'EN')
+            title = doc.css('title').text
+
+            #関数名の正規表現でヒットしたらそのパスを配列にぶっこむ
+            if title.match(/#{searchname}/)
                 $pathArray.push(f)
             end
         end
     end
-
-    search(searchname)
 end
 
 def nokogiri_sample(path ,searchname)
@@ -126,9 +128,9 @@ while i < searchnameArray.length
             test << $resultCountArray
             test << $resultArray
         end
-        printf("出力終了:#{searchnameArray[i]} \n")
+        printf("出力終了[#{i + 1}/#{searchnameArray.length}]:#{searchnameArray[i]} \n")
     else
-        printf("指定した対象は見つかりませんでした　:#{searchnameArray[i]} \n")
+        printf("指定した対象は見つかりませんでした[#{i + 1}/#{searchnameArray.length}]:#{searchnameArray[i]} \n")
     end
     i += 1
 
@@ -136,5 +138,5 @@ while i < searchnameArray.length
     $cntArray = []
     $strArray = []
 end
-
+puts "全ての出力が完了しました"
 
